@@ -10,12 +10,12 @@ void DFS(int v){
     mark[v] = true;
     component.push_back(v);
 
-    for(auto u : adj[v]){
+    for(auto u : adj[v])
         if (!mark[u]) DFS(u);   
 }
 
 int main(){
-    int n, m;cin >> n >> m;
+    int n, m; cin >> n >> m;
     for(int i = 0; i < m; i++){
         int u, v; cin >> u >> v;
         adj[u].push_back(v);
@@ -30,4 +30,5 @@ int main(){
             cout << v << ' ';
         cout << '\n';
     }
+    return 0;
 }
