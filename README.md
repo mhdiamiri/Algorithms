@@ -1,1 +1,1 @@
-useful algorithms written by c++
+Useful algorithms, written in c++
