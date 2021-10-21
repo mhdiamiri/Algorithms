@@ -1,28 +1,45 @@
-////WRONG!
-
-#include <bits/stdc++.h>
-#include <queue>
+#include<bits/stdc++.h>
+#define distance d
 
 using namespace std;
-const int N = 10;
-queue<int> q;
-vector<int> obj[N];
-int level[N];
 
-void BFS(int s){
-    for(auto u: obj[s]){
-        if(level[u]!= -1) continue;
-        q.push(u);
-        level[u] = level[s] + 1;
+const int maxN = 1e5 + 10, oo = 1e9;
+
+vector <int> adj[maxN];
+int distance[maxN];
+
+queue<int> q;
+
+void BFS(int n, int r) {
+
+    for (int i=1; i<=n; i++) distance[i] = oo;
+    distance[r] = 0;
+    q.push(r);
+
+    while(q.size()) {
+        int v = q.front();
+        q.pop();
+
+        for (auto u : adj[v])
+            if(distance[u] > distance[v] + 1) {
+                distance[u] = distance[v] + 1;
+                q.push(u);
+            }
     }
 }
 
-int main(){
-    int s = 0;
-    q.push(s);
-    while(!q.empty()){
-        BFS(q.front());
-        q.pop();
+int main() {
+
+    int n, m; cin >> n >> m;
+    for (int i=0; i<m; i++) {
+        int u, v; cin >> u >> v;
+        adj[u].push_back(v);
+        adj[v].push_back(u);
     }
-    return 0;
+
+    BFS(n, 1);
+
+    for (int i=1; i<=n; i++)
+        cout << i << ':' << distance[i] << '\n';
+
 }
